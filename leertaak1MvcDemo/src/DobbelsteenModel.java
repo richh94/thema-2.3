@@ -53,7 +53,8 @@ public class DobbelsteenModel
 		// Hieronder gebruiken we het nieuwe Java "foreach" statement. 
 		// Lees het als: "for each ActionListener in actionListenerList do ..."
 		// Je kunt ook een for-lus of een iterator gebruiken, maar foreach is het elegantste.
-		for( ActionListener l : actionListenerList)
+		for( ActionListener l : actionListenerList){
 			l.actionPerformed( e );
+		}
 	}
 }
