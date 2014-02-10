@@ -6,7 +6,6 @@ public class DobbelsteenView extends JPanel implements ActionListener
 {
 	private int waarde;
     private Color kleur;
-    private String appelflap;
     DobbelsteenModel d;
 	public DobbelsteenView(Color c)
 	{
