@@ -121,6 +121,11 @@ public class Rational {
 								,denominator * other.denominator);
 	}
 
+	/**
+	 * Multiplies a rational number.
+	 * @param other The other rational variable for the calculation 
+	 * @result A rational number, completed out of the given rational numbers
+	 */
 	public Rational mul(Rational other) {
 		return new Rational(
 			numerator * other.numerator,
