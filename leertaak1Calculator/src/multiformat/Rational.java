@@ -133,10 +133,18 @@ public class Rational {
 	}
 
 	public Rational div(Rational other) {
-		return new Rational(
-			numerator * other.denominator,
-			denominator * other.numerator);
+		try{
+			if(other.numerator == 0 || other.denominator == 0) throw new Exception("Can't devide by 0.");
+			return new Rational(
+				numerator * other.denominator,
+				denominator * other.numerator
+			);
+		} catch(Exception e){
+			System.out.println(e.getMessage());
+			return new Rational();
+		}
 	}
+
 
 	public void copyOf(Rational other) {
 		this.numerator = other.numerator;
