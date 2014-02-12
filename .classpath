@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="leertaak1Calculator/src"/>
-	<classpathentry kind="src" path="leertaak1 array_sum"/>
 	<classpathentry kind="src" path="leertaak1MvcDemo/src"/>
 	<classpathentry kind="src" path="leertaak2Classifier/src"/>
 	<classpathentry kind="src" path="leertaak2GetalRij"/>
@@ -18,5 +17,6 @@
 	<classpathentry kind="lib" path="leertaak6StrategicGameServer/StrategicGameServer-1.0.jar"/>
 	<classpathentry kind="lib" path="leertaak6StrategicGameServer/StrategicGameServer-1.0.src.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
