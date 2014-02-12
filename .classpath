@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="leertaak1Calculator/src"/>
+	<classpathentry kind="src" path="leertaak1 array_sum"/>
 	<classpathentry kind="src" path="leertaak1MvcDemo/src"/>
 	<classpathentry kind="src" path="leertaak2Classifier/src"/>
 	<classpathentry kind="src" path="leertaak2GetalRij"/>
