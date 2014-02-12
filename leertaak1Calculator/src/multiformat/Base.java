@@ -55,7 +55,7 @@ public abstract class Base {
       sign = 1.0;
       number = number.substring(1).trim();
     }
-
+    
     // parses the integer part and the decimal part
     int power;
     int index = number.indexOf('.');
@@ -71,9 +71,14 @@ public abstract class Base {
     // process the number. "101.101" is 4*1 + 2*0 + 1*1 + 1*0.5 + ...
     for(int i = 0; i < number.length(); i++)
       if(number.charAt(i)!='.'){
+    	  if(digits.indexOf(number.charAt(i)) == -1){    		  
+    		  throw new NumberBaseException(number.charAt(i), name);
+    	  }
         result += mult * digits.indexOf(number.charAt(i));
         mult /= base;
       }
+    
+    
     return result * sign;
   }
 
