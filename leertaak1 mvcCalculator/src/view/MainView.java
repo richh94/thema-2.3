@@ -18,7 +18,7 @@ public class MainView extends JFrame implements ActionListener{
 	private JButton bin = new JButton("Bin");
 	private JButton ocd = new JButton("Ocd");
 	
-	private JButton rat = new JButton("Rational");
+	private JButton rat = new JButton("Rat");
 	private JButton fix = new JButton("Fixed");
 	private JButton flo = new JButton("Float");
 	private JButton clear = new JButton("C");
@@ -56,7 +56,7 @@ public class MainView extends JFrame implements ActionListener{
 		buttonPanel.add(bin);
 		buttonPanel.add(ocd);
 		
-		buttonPanel.add(new JLabel("Format"));
+		buttonPanel.add(new JLabel("Format (C)"));
 		buttonPanel.add(rat);
 		buttonPanel.add(fix);
 		buttonPanel.add(flo);
@@ -70,26 +70,46 @@ public class MainView extends JFrame implements ActionListener{
 		
 		top.add(buttonPanel, BorderLayout.SOUTH);
 		this.add(top);
-		
-		//panel.add(input, BorderLayout.EAST);
-		
-		
-		/*this.add(dec);
-		dec.addActionListener(this);
-		this.add(hex);
-		hex.addActionListener(this);
-		this.add(bin);
-		bin.addActionListener(this);
-		this.add(ocd);
-		ocd.addActionListener(this);*/
-
 	}
 	
-	public void actionPerformed( ActionEvent e )
-	{
-		/*if(e.getSource() == dec){
-			field.setText("decimal");
-		}*/
+	//getters/setters voor input/output
+	public String getInput(){
+		String temp = input.getText();
+		input.setText("");
+		return temp;
+	}
+	public void setField(String value){
+		field.setText(value);
+	}
+	public void update(){
+		field.setText("["+
+				calc.getBase().getName()+"]["+
+				calc.getFormat().getName()+"] "+
+				calc.firstOperand()+", "+
+				calc.secondOperand()+""
+			);
 	}
 	
+	//action listeners
+	public void addAddAL(ActionListener al){add.addActionListener(al);}
+	
+	public void addDecAL(ActionListener al){dec.addActionListener(al);}
+	public void addHexAL(ActionListener al){hex.addActionListener(al);}
+	public void addBinAL(ActionListener al){bin.addActionListener(al);}
+	public void addOcdAL(ActionListener al){ocd.addActionListener(al);}
+	
+	public void addRatAL(ActionListener al){rat.addActionListener(al);}
+	public void addFixAL(ActionListener al){fix.addActionListener(al);}
+	public void addFloAL(ActionListener al){flo.addActionListener(al);}
+	public void addClearAL(ActionListener al){clear.addActionListener(al);}
+	
+	public void addPlusAL(ActionListener al){plus.addActionListener(al);}
+	public void addMinusAL(ActionListener al){minus.addActionListener(al);}
+	public void addDivideAL(ActionListener al){divide.addActionListener(al);}
+	public void addMultiplyAL(ActionListener al){multiply.addActionListener(al);}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//null
+	}
 }
