@@ -71,3 +71,5 @@ public class DobbelsteenView extends JPanel implements ActionListener
 	    return new Dimension(80,80);
 	}    
 }
+
+

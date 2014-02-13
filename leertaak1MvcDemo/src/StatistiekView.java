@@ -6,7 +6,6 @@ import java.util.*;
     
 public class StatistiekView extends JPanel implements ActionListener
 {
-	private JTextField steenRoodVeld = new JTextField();
     DobbelsteenModel d;
     int[] counters = new int[6];
     JLabel[] labels = new JLabel[7];
