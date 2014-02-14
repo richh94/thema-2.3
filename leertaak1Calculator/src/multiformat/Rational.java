@@ -132,17 +132,15 @@ public class Rational {
 			denominator * other.denominator);
 	}
 
-	public Rational div(Rational other) {
-		try{
-			if(other.numerator == 0 || other.denominator == 0) throw new Exception("Can't devide by 0.");
-			return new Rational(
-				numerator * other.denominator,
-				denominator * other.numerator
-			);
-		} catch(Exception e){
-			System.out.println(e.getMessage());
-			return new Rational();
-		}
+	public Rational div(Rational other) throws DivideByZeroException {
+		System.out.println(other.denominator);
+		System.out.println(other.numerator);
+		
+		if(other.numerator == 0 || other.denominator == 0) throw new DivideByZeroException("Can't devide by 0.");
+		return new Rational(
+			numerator * other.denominator,
+			denominator * other.numerator
+		);
 	}
 
 

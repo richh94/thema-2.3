@@ -1,11 +1,10 @@
 package test;
 
-import static org.junit.Assert.*;
+import org.junit.*;
 
+import junit.framework.TestCase;
+import multiformat.DivideByZeroException;
 import multiformat.Rational;
-
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * JUnit Testcase to test Rational. 
@@ -13,8 +12,13 @@ import org.junit.Test;
  * @author gebruiker
  *
  */
-public class TestRational {
+public class TestRational extends TestCase {
 	Rational r;
+	
+	public TestRational(String arg0) {
+		super(arg0);
+	}
+
 	
 	@Before
 	public void setUp(){
@@ -66,6 +70,12 @@ public class TestRational {
 		assertEquals(2.0, r.getDenominator());		
 	}
 
-
+	@Test(expected = DivideByZeroException.class)
+	public void testDiv() throws DivideByZeroException {
+		r.setNumerator(10);
+		r.setDenominator(0);
+		
+		r.div(r);
+	}
 
 }

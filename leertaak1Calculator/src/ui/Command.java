@@ -18,6 +18,7 @@
  */
 package ui;
 import multiformat.*;
+
 import java.io.*;
 
 /**
@@ -31,7 +32,7 @@ public class Command {
   BufferedReader prevReader=null;
   BufferedReader lineReader = new  BufferedReader( new InputStreamReader( System.in ) );
 
-  boolean nextCommand() {
+  boolean nextCommand() throws DivideByZeroException {
     System.out.print("\n["+calc.getBase().getName()+","
                             + calc.getFormat().getName()+","
                             + calc.firstOperand() + ", "
@@ -110,7 +111,7 @@ public class Command {
     System.out.println();
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws DivideByZeroException {
     Command command = new Command();
     while(command.nextCommand());
   }
