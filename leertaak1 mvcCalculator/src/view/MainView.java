@@ -2,12 +2,12 @@ package view;
 
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import model.*;
 
-public class MainView extends JFrame implements ActionListener{
+@SuppressWarnings("serial")
+public class MainView extends JFrame{
 
 	private JTextField field = new JTextField(30);
 	private JTextField input = new JTextField(20);
@@ -30,8 +30,7 @@ public class MainView extends JFrame implements ActionListener{
 	public MainView(Calculator calculator){
 		
 		calc = calculator;
-		
-		JFrame frame = new JFrame();
+
 		this.setSize(400, 150);
 		this.setTitle("J&R's awesome calculator");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,7 +89,6 @@ public class MainView extends JFrame implements ActionListener{
 	}
 	public void update(){
 		field.setText(
-				calc.firstOperand()+", "+
 				calc.secondOperand()
 			);
 	}
@@ -112,9 +110,4 @@ public class MainView extends JFrame implements ActionListener{
 	public void addMinusAL(ActionListener al){minus.addActionListener(al);}
 	public void addDivideAL(ActionListener al){divide.addActionListener(al);}
 	public void addMultiplyAL(ActionListener al){multiply.addActionListener(al);}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		//null
-	}
 }

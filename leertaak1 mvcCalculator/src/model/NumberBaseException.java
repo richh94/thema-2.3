@@ -1,5 +1,6 @@
 package model;
 
+@SuppressWarnings("serial")
 public class NumberBaseException extends RuntimeException{
 
 	public NumberBaseException(char usedNumber, String base){
