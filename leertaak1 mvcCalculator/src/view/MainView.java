@@ -13,14 +13,11 @@ public class MainView extends JFrame implements ActionListener{
 	private JTextField input = new JTextField(20);
 	private JButton add = new JButton("Add");
 	
-	private JButton dec = new JButton("Dec");
-	private JButton hex = new JButton("Hex");
-	private JButton bin = new JButton("Bin");
-	private JButton ocd = new JButton("Ocd");
+	private String[] bases = {"dec", "hex", "bin", "ocd"};
+	private JRadioButton[] basebuttons = new JRadioButton[4];
+	private String[] formats = {"fixed", "rat", "float"};
+	private JRadioButton[] formatbuttons = new JRadioButton[3];
 	
-	private JButton rat = new JButton("Rat");
-	private JButton fix = new JButton("Fixed");
-	private JButton flo = new JButton("Float");
 	private JButton clear = new JButton("C");
 	
 	private JButton plus = new JButton("+");
@@ -51,15 +48,25 @@ public class MainView extends JFrame implements ActionListener{
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(3, 5));
 		buttonPanel.add(new JLabel("Base"));
-		buttonPanel.add(dec);
-		buttonPanel.add(hex);
-		buttonPanel.add(bin);
-		buttonPanel.add(ocd);
+		
+		ButtonGroup basegroup = new ButtonGroup();
+		for(int i=0; i<bases.length; i++){
+			basebuttons[i] = new JRadioButton(bases[i]);
+			basegroup.add(basebuttons[i]);
+			buttonPanel.add(basebuttons[i]);
+		}
+		basebuttons[0].setSelected(true);
 		
 		buttonPanel.add(new JLabel("Format (C)"));
-		buttonPanel.add(rat);
-		buttonPanel.add(fix);
-		buttonPanel.add(flo);
+		
+		ButtonGroup formatgroup = new ButtonGroup();
+		for(int i=0; i<formats.length; i++){
+			formatbuttons[i] = new JRadioButton(formats[i]);
+			formatgroup.add(formatbuttons[i]);
+			buttonPanel.add(formatbuttons[i]);
+		}
+		formatbuttons[0].setSelected(true);
+		
 		buttonPanel.add(clear);
 		
 		buttonPanel.add(new JLabel("Calculate"));
@@ -82,25 +89,23 @@ public class MainView extends JFrame implements ActionListener{
 		field.setText(value);
 	}
 	public void update(){
-		field.setText("["+
-				calc.getBase().getName()+"]["+
-				calc.getFormat().getName()+"] "+
+		field.setText(
 				calc.firstOperand()+", "+
-				calc.secondOperand()+""
+				calc.secondOperand()
 			);
 	}
 	
 	//action listeners
 	public void addAddAL(ActionListener al){add.addActionListener(al);}
 	
-	public void addDecAL(ActionListener al){dec.addActionListener(al);}
-	public void addHexAL(ActionListener al){hex.addActionListener(al);}
-	public void addBinAL(ActionListener al){bin.addActionListener(al);}
-	public void addOcdAL(ActionListener al){ocd.addActionListener(al);}
+	public void addDecAL(ActionListener al){basebuttons[0].addActionListener(al);}
+	public void addHexAL(ActionListener al){basebuttons[1].addActionListener(al);}
+	public void addBinAL(ActionListener al){basebuttons[2].addActionListener(al);}
+	public void addOcdAL(ActionListener al){basebuttons[3].addActionListener(al);}
 	
-	public void addRatAL(ActionListener al){rat.addActionListener(al);}
-	public void addFixAL(ActionListener al){fix.addActionListener(al);}
-	public void addFloAL(ActionListener al){flo.addActionListener(al);}
+	public void addFixAL(ActionListener al){formatbuttons[0].addActionListener(al);}
+	public void addRatAL(ActionListener al){formatbuttons[1].addActionListener(al);}
+	public void addFloAL(ActionListener al){formatbuttons[2].addActionListener(al);}
 	public void addClearAL(ActionListener al){clear.addActionListener(al);}
 	
 	public void addPlusAL(ActionListener al){plus.addActionListener(al);}
