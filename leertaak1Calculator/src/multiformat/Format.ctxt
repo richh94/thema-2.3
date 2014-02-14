@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.lang.String\ getName()
+comment1.params=p_number\ p_base
+comment1.target=java.lang.String\ toString(Rational,\ Base)
+comment1.text=\r\n\ Translate\ the\ internal\ Rational\ to\ a\ String\ representation\r\n\ using\ the\ correct\ Format\ and\ Base.\r\n
+comment2.params=p_number\ p_base
+comment2.target=Rational\ parse(java.lang.String,\ Base)
+comment2.text=\r\n\ Translate\ a\ string\ representation\ in\ a\ specific\ format\ and\ base\ to\r\n\ the\ internal\ Rational\ representation.\r\n
+numComments=3

@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=newOperand
+comment0.target=void\ addOperand(java.lang.String)
+comment1.params=
+comment1.target=void\ add()
+comment10.params=newFormat
+comment10.target=void\ setFormat(Format)
+comment11.params=
+comment11.target=Format\ getFormat()
+comment2.params=
+comment2.target=void\ subtract()
+comment3.params=
+comment3.target=void\ multiply()
+comment4.params=
+comment4.target=void\ divide()
+comment5.params=
+comment5.target=void\ delete()
+comment6.params=
+comment6.target=java.lang.String\ firstOperand()
+comment7.params=
+comment7.target=java.lang.String\ secondOperand()
+comment8.params=newBase
+comment8.target=void\ setBase(Base)
+comment9.params=
+comment9.target=Base\ getBase()
+numComments=12

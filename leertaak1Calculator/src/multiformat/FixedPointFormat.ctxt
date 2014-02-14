@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.lang.String\ getName()
+comment1.params=number\ base
+comment1.target=java.lang.String\ toString(Rational,\ Base)
+comment2.params=number\ base
+comment2.target=Rational\ parse(java.lang.String,\ Base)
+numComments=3
