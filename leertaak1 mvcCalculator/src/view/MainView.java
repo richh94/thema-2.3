@@ -31,7 +31,7 @@ public class MainView extends JFrame{
 		
 		calc = calculator;
 
-		this.setSize(400, 150);
+		this.setSize(400, 180);
 		this.setTitle("J&R's awesome calculator");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -75,7 +75,11 @@ public class MainView extends JFrame{
 		buttonPanel.add(multiply);
 		
 		top.add(buttonPanel, BorderLayout.SOUTH);
-		this.add(top);
+		getContentPane().add(top, BorderLayout.NORTH);
+	}
+	
+	public void addPanel(JPanel panel){
+		getContentPane().add(panel);
 	}
 	
 	//getters/setters voor input/output
@@ -88,9 +92,7 @@ public class MainView extends JFrame{
 		field.setText(value);
 	}
 	public void update(){
-		field.setText(
-				calc.secondOperand()
-			);
+		field.setText(calc.getOperand());
 	}
 	
 	//action listeners

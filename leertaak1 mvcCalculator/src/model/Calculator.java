@@ -18,12 +18,15 @@
  */
 package model;
 
+import java.util.*;
+
 /**
  * The multiformat calculator
  */
 public class Calculator {
   private Rational operand_0 = new Rational();
   private Rational operand_1 = new Rational();
+  private Stack<Rational> operands = new Stack<Rational>();
   
   // The current format of the calculator
   private Format format = new FixedPointFormat();
@@ -31,36 +34,71 @@ public class Calculator {
   private Base base = new DecimalBase();
 
   public void addOperand(String newOperand) throws FormatException {
-	  operand_1 = operand_0;
-      operand_0 = format.parse(newOperand, base);
+	  operands.push(format.parse(newOperand, base));
   }
 
   public void add(){
-    operand_0 = operand_1.plus(operand_0);
-    operand_1 = new Rational();
+	Rational result = new Rational();
+	while(!operands.empty()){
+		result = result.plus(operands.pop());
+	}
+	operands.push(result);
   }
   public void subtract() {
-    operand_0 = operand_1.minus(operand_0);
-    operand_1 = new Rational();
+	  Rational result = new Rational();
+	  while(!operands.empty()){
+		result = result.minus(operands.pop());
+	  }
+	  operands.push(result);
   }
   public void multiply() {
-    operand_0 = operand_1.mul(operand_0);
-    operand_1 = new Rational();
+	  if(!operands.empty()){
+		  Rational result = operands.pop();
+		  while(!operands.empty()){
+				result = result.mul(operands.pop());
+		  }
+		  operands.push(result);
+	  }else{
+		  operands.push(new Rational());
+	  }
   }
   public void divide() {
-    operand_0 = operand_1.div(operand_0);
-    operand_1 = new Rational();
-  }
-  public void delete() {
-    operand_0 = operand_1;
-    operand_1 = new Rational();
+	  if(!operands.empty()){
+		  Rational result = operands.pop();
+		  while(!operands.empty()){
+				result = result.div(operands.pop());
+		  }
+		  operands.push(result);
+	  }else{
+		  operands.push(new Rational());
+	  }
   }
 
-  public String firstOperand(){
-    return format.toString(operand_1,base);
+  public String getOperand(){
+	if(operands.empty()){
+		return "";
+	}else{
+		return format.toString(operands.get(countOperands()-1),base);
+	}
   }
-  public String secondOperand(){
-    return format.toString(operand_0,base);
+  
+  public String getOperands(){
+	  String temp = "";
+	  for(Rational operand : operands){
+		  temp += format.toString(operand, base) + " ";
+	  }
+	  return temp;
+  }
+  
+  public void clear(){
+	  while(!operands.empty()){
+		  operands.pop();
+	  }
+	  setBase(new DecimalBase());
+	  setFormat(new FixedPointFormat());
+  }
+  public int countOperands(){
+	  return operands.size();
   }
 
   public void setBase(Base newBase){

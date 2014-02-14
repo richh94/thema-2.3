@@ -24,15 +24,19 @@ import controller.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Command extends JApplet {
-  public static void main(String[] args) {
-	  Calculator calculator = new Calculator();						//model
-	  MainView mainview = new MainView(calculator);					//view
-	  @SuppressWarnings("unused")
-	Controller controller = new Controller(calculator, mainview);	//controller
+public class Command extends JFrame {
+	
+	public static void main(String[] args) {
 	  
-	  mainview.setVisible(true);
-	  mainview.update();
+		Calculator calculator = new Calculator();						//model
+		MainView mainview = new MainView(calculator);					//view
+		ExtraView extraview = new ExtraView(calculator);
+		@SuppressWarnings("unused")
+		Controller controller = new Controller(calculator, mainview, extraview);	//controller	
+		
+		mainview.addPanel(extraview.getPanel());
+		mainview.update();
+		mainview.setVisible(true);
   }
 
 }
