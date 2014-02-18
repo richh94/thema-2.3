@@ -73,7 +73,7 @@ public class TestRational extends TestCase {
 	@Test(expected = DivideByZeroException.class)
 	public void testDiv() throws DivideByZeroException {
 		r.setNumerator(10);
-		r.setDenominator(0);
+		r.setDenominator(2);
 		
 		r.div(r);
 	}
