@@ -19,7 +19,7 @@ public class SnelheidOefening {
 		
 		startTime = tijd();
 		System.out.println("filling getallen[]");
-		GetalRij gr = new GetalRij( 500000, 2000000 );
+		GetalRij gr = new GetalRij( 1000000, 2000000 );
 		
 		timeCost = tijd() - startTime;
 		System.out.println("getallen[] filled " + timeCost + " ms");

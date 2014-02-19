@@ -5,11 +5,13 @@ import java.util.Random;
 public class GetalRij {
 	private int[] getallen;
 	private int[] getallenSorted;
+	private int[] getallenSortedFreeSlot;
 	
 	public GetalRij( int aantal, int max ){
 		// Belangrijke aanname: aantal < max, anders kunnen de getallen niet uniek zijn.
 		getallen = new int[aantal];
 		getallenSorted = new int[aantal];
+		getallenSortedFreeSlot = new int[aantal + 1];
 		
 		vulArrayMetUniekeWaarden( aantal, max );
 	}
@@ -32,6 +34,7 @@ public class GetalRij {
 		}
 		
 		getallenSorted = getallen;
+		System.arraycopy(getallenSorted, 0, getallenSortedFreeSlot, 0, getallenSorted.length);
 		Arrays.sort(getallenSorted);
 	}
 	
@@ -67,18 +70,19 @@ public class GetalRij {
 	    return false;
 	}
 
-	public boolean zitErinC( int zoekWaarde ){		
-	    for (int i = 0; i < getallenSorted.length; i++){
-	    	if (getallenSorted[i] == zoekWaarde) {
-	    		return true;
-	    	}
-	    }
-	    
-	    return false;
+	public boolean zitErinC( int zoekWaarde ){
+		getallenSortedFreeSlot[getallenSortedFreeSlot.length - 1] = zoekWaarde;
+		
+		int i = 0;
+		while (getallenSortedFreeSlot[i] != zoekWaarde) {
+			i++;
+		} 
+		
+		return i < getallenSorted.length;
 	}
 	
 	public boolean zitErinD( int zoekWaarde ){		
-		return linearArraySearch (zoekWaarde, 0, 9999, -1);
+		return linearArraySearch (zoekWaarde, 0, (getallenSorted.length - 1), -1);
 	}
 	
 	public boolean linearArraySearch ( int zoekWaarde, int firstPosition, int lastPosition, int prevPosition) {
