@@ -69,7 +69,8 @@ public class GetalRij {
 	    
 	    return false;
 	}
-
+	
+	/*
 	public boolean zitErinC( int zoekWaarde ){
 		getallenSortedFreeSlot[getallenSortedFreeSlot.length - 1] = zoekWaarde;
 		
@@ -79,6 +80,16 @@ public class GetalRij {
 		} 
 		
 		return i < getallenSorted.length;
+	}*/
+	
+	public boolean zitErinC( int zoekWaarde ){
+	    for (int i = 0; i < getallen.length; i++){
+	    	if (getallen[i] == zoekWaarde) {
+	    		return true;
+	    	}
+	    }
+	    
+	    return false;
 	}
 	
 	public boolean zitErinD( int zoekWaarde ){		
@@ -113,5 +124,4 @@ public class GetalRij {
 		for( int i=0; i<getallen.length; i++)
 			System.out.println(getallen[i]);
 	}
-
 }
