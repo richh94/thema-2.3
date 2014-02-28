@@ -3,6 +3,7 @@ import junit.framework.TestCase;
 import classifier.*;
 
 import java.io.*;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -15,7 +16,6 @@ public class TestFileReader extends TestCase {
 		super(arg0);
 	}
 
-	@SuppressWarnings("resource")
 	private DecisionTree buildTree(){
 		Node iroot = null;
 		File resultsFile = makeAbsoluteFilename(RESULTS_FILE);
