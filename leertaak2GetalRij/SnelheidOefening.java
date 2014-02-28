@@ -1,6 +1,6 @@
 
 public class SnelheidOefening {
-	private static final int VALUE_A = 23432;
+	private static final int VALUE_A = 503;
 	private static final int VALUE_B = VALUE_A;
 	private static final int VALUE_C = VALUE_A;
 	private static final int VALUE_D = VALUE_A;
@@ -19,7 +19,7 @@ public class SnelheidOefening {
 		
 		startTime = tijd();
 		System.out.println("filling getallen[]");
-		GetalRij gr = new GetalRij( 1000000, 2000000 );
+		GetalRij gr = new GetalRij( 100000, 200000 );
 		
 		timeCost = tijd() - startTime;
 		System.out.println("getallen[] filled " + timeCost + " ms");
@@ -43,7 +43,7 @@ public class SnelheidOefening {
 		System.out.println("Getal " + VALUE_C + " zit in C: " + inC + " Tijd: " + timeCost + " ms");	
 		
 		startTime = tijd();
-		inD = gr.zitErinC(VALUE_D);
+		inD = gr.zitErinD(VALUE_D);
 		timeCost = tijd() - startTime;
 		
 		System.out.println("Getal " + VALUE_D + " zit in D: " + inD + " Tijd: " + timeCost + " ms");	

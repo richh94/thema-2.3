@@ -92,27 +92,26 @@ public class GetalRij {
 	    return false;
 	}
 	
-	public boolean zitErinD( int zoekWaarde ){		
-		return linearArraySearch (zoekWaarde, 0, (getallenSorted.length - 1), -1);
+	public boolean zitErinD( int zoekWaarde ){
+		return linearArraySearch (zoekWaarde, 0, (getallenSorted.length - 1));
 	}
 	
-	public boolean linearArraySearch ( int zoekWaarde, int firstPosition, int lastPosition, int prevPosition) {
+	public boolean linearArraySearch ( int zoekWaarde, int firstPosition, int lastPosition) {
 		int actualPosition = (int) Math.ceil(((lastPosition - firstPosition) / 2.0) + firstPosition); 
 		
-		if (prevPosition == actualPosition) return false;
-		
 		if (zoekWaarde == getallenSorted[actualPosition]) {
-			System.out.println("equals" + getallenSorted[actualPosition]);
-			
+			//System.out.println("equals" + getallenSorted[actualPosition]);
 			return true;
-		} else if (zoekWaarde > getallenSorted[actualPosition]) {
-			System.out.println("more " + getallenSorted[actualPosition]);
-	
-			return linearArraySearch(zoekWaarde, actualPosition, lastPosition, actualPosition);
+		}
+		
+		if ((lastPosition - firstPosition) == 1) 	return false;
+		
+		if (zoekWaarde > getallenSorted[actualPosition]) {
+			//System.out.println("more " + getallenSorted[actualPosition]);
+			return linearArraySearch(zoekWaarde, actualPosition, lastPosition);
 		} else {
-			System.out.println("less " + getallenSorted[actualPosition]);
-
-			return linearArraySearch(zoekWaarde, firstPosition, actualPosition, actualPosition);
+			//System.out.println("less " + getallenSorted[actualPosition]);
+			return linearArraySearch(zoekWaarde, firstPosition, actualPosition);
 		}
 	}
 	
