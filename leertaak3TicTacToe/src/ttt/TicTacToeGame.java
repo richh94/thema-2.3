@@ -16,7 +16,7 @@ class TicTacToe
     private Random random=new Random();  
 	private int side=random.nextInt(2);  
 	private int position=UNCLEAR;
-	private char computerChar,humanChar;
+	private char computerChar,humanChar, emptyChar;
 
 	// Constructor
 	public TicTacToe( )
@@ -27,6 +27,7 @@ class TicTacToe
 	
 	private void initSide()
 	{
+		emptyChar = '.';
 	    if (this.side==COMPUTER) { computerChar='X'; humanChar='O'; }
 		else                     { computerChar='O'; humanChar='X'; }
     }
@@ -73,11 +74,11 @@ class TicTacToe
     }
 
    
-    //check if move ok
+    //check if move = ok
     public boolean moveOk(int move)
     {
- 	//return ( move>=0 && move <=8 && board[move/3 ][ move%3 ] == EMPTY );
- 	return true;
+	 	return ( move>=0 && move <=8 && board[move/3 ][ move%3 ] == EMPTY );
+	 	//return true;
     }
     
     // play move
@@ -91,21 +92,73 @@ class TicTacToe
 	// Simple supporting routines
 	private void clearBoard( )
 	{
-		//TODO:
+		//TODO: 
+		//alle board values op empty setten
+		
+		for(int x = 0; x<this.board.length; x++){
+			for(int y=0; y<this.board[x].length; y++){
+				place(x, y, EMPTY);
+			}
+		}
 	}
 
 
 	private boolean boardIsFull( )
 	{
 		//TODO:
+		//kijken of alle posities geset zijn
+		
+		for(int x = 0; x<board.length; x++){
+			for(int y=0; y<board[x].length; y++){
+				if(squareIsEmpty(x,y)){
+					return false;
+				}
+			}
+		}
+		//we hebben alles doorlopen, maar we zijn nog geen 
+		//positie tegengekomen die leeg is... dus het board
+		//is vol, dus return true.
 		return true;
 	}
 
 	// Returns whether 'side' has won in this position
-	private boolean isAWin( int side )
+	public boolean isAWin( int side )
 	{
 	    //TODO:
-	    return true;
+		//check of er 3 op 1 rij zijn van de side
+		int[][][] winning = 			//met 1 van de volgende combo's win je
+			{
+				{{0,0}, {0,1}, {0,2}},	//horizontal
+				{{1,0}, {1,1}, {1,2}},	//h
+				{{2,0}, {2,1}, {2,2}},	//h
+				
+				{{0,0}, {1,0}, {2,0}},	//vertical
+				{{0,1}, {1,1}, {2,1}},	//v
+				{{0,2}, {1,2}, {2,2}},	//v
+				
+				{{0,0}, {1,1}, {2,2}},	//diagonal
+				{{0,2}, {1,1}, {2,0}}	//d
+			};
+		
+		int x = 9;   //0 (null) is used on the board, 9 isn't
+		int y = 9;
+		int win = 0; //we need a row of 3, stored in here.
+		
+		for( int[][] id : winning ){
+			for( int[] foo : id){
+				for( int value : foo){
+					if(x == 9){	x = value;}
+					else	  { y = value;}
+				}
+				if(this.board[x][y] == side){
+					win++;
+				}
+				x=9; //clear x coordinate
+			}
+			if(win == 3) return true;
+			win = 0;
+		}
+		return false;		
     }
 
 	// Play a move, possibly clearing a square
@@ -123,6 +176,9 @@ class TicTacToe
 	private int positionValue( )
 	{
 		// TODO:
+		if(isAWin(side)){
+			return side;
+		}
 		return UNCLEAR;
 	}
 	
@@ -130,7 +186,23 @@ class TicTacToe
 	public String toString()
 	{
 	    //TODO:
-		return "...\n...\n...\n";   
+		//output naar string genereren
+	
+		String rtrn = "";
+		
+		for(int x = 0; x<board.length; x++){
+			for(int y=0; y<board[x].length; y++){
+				if(board[x][y] == HUMAN){
+					rtrn += humanChar;
+				}else if(board[x][y] == COMPUTER){
+					rtrn += computerChar;
+				}else{
+					rtrn += emptyChar;
+				}
+			}
+			rtrn += "\n";
+		}
+		return rtrn;   
 	}  
 	
 	public boolean gameOver()
