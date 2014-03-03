@@ -1,5 +1,7 @@
 package ttt;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 class TicTacToe
 {
@@ -17,6 +19,7 @@ class TicTacToe
 	private int side=random.nextInt(2);  
 	private int position=UNCLEAR;
 	private char computerChar,humanChar, emptyChar;
+	private Map<int[][], Integer> positions = new HashMap<int[][], Integer>();
 
 	// Constructor
 	public TicTacToe( )
@@ -51,13 +54,12 @@ class TicTacToe
 
 	public int chooseMove()
 	{
-	    //Best best=chooseMove(COMPUTER);
-	    //return best.row*3+best.column;
-	    return 0;
+		positions.clear();
+		Best best = chooseMove(COMPUTER, 0, HUMAN_WIN, COMPUTER_WIN);
+		return best.row * 3 + best.column;
     }
     
-    // Find optimal move
-	private Best chooseMove( int side )
+	private Best chooseMove(int side, int amountCheckedBestMoves, int human, int computer)
 	{
 		int opp;              // The other side
 		Best reply;           // Opponent's best reply
@@ -66,12 +68,64 @@ class TicTacToe
 		int bestColumn = 0;
 		int value;
 
-		if( ( simpleEval = positionValue( ) ) != UNCLEAR )
-			return new Best( simpleEval );
-
+		if ((simpleEval = positionValue()) != UNCLEAR)
+			return new Best(simpleEval);
+		
 		// TODO: implementeren m.b.v. recursie/backtracking
-	    return null;
-    }
+		
+		int[][] tmpBoard = board.clone();
+		if (amountCheckedBestMoves >= 3 && amountCheckedBestMoves <= 5){
+			Integer pos = positions.get(tmpBoard);
+			if (pos != null){
+				return new Best(pos);
+			}
+		}
+
+		if (side == COMPUTER){
+			opp = HUMAN;
+			value = human;
+		}else{
+			opp = COMPUTER;
+			value = computer;
+		}
+
+		for (int i = 0; i < (board.length * board[0].length); i++){
+			int row = i / board.length;
+			int column = i % board[0].length;
+
+			// First check if the row, column combination is empty
+			// If there is already a side on the board.. there's no need to check if it is the best move
+			if (squareIsEmpty(row, column)){
+				// After that place the current side on the board
+				place(row, column, side);
+				// Check if this is the best move or not 
+				reply = chooseMove(opp, amountCheckedBestMoves + 1, human, computer);
+				// Remove the current side from the board again
+				// So we can check whether this was the best move or not below
+				place(row, column, EMPTY);
+
+				// Is the current side a human? and was this the best move for the human?
+				// Is the current side a computer? and was this the best move for the computer?
+				if (side == HUMAN && reply.val < value || side == COMPUTER && reply.val > value){
+					// Update the values of the opposite side
+					if (side == HUMAN){
+						computer = reply.val;
+						value = computer;
+					}else{
+						human = reply.val;
+						value = human;
+					}
+					bestRow = row;
+					bestColumn = column;
+					if (human >= computer) break;
+				}
+			}
+		}
+		if (amountCheckedBestMoves <= 5){
+			positions.put(tmpBoard, value);
+		}
+		return new Best(value, bestRow, bestColumn);
+	}
 
    
     //check if move = ok
@@ -125,7 +179,6 @@ class TicTacToe
 	public boolean isAWin( int side )
 	{
 	    //TODO:
-		//check of er 3 op 1 rij zijn van de side
 		int[][][] winning = 			//met 1 van de volgende combo's win je
 			{
 				{{0,0}, {0,1}, {0,2}},	//horizontal
@@ -175,11 +228,10 @@ class TicTacToe
 	// Compute static value of current position (win, draw, etc.)
 	private int positionValue( )
 	{
-		// TODO:
-		if(isAWin(side)){
-			return side;
-		}
-		return UNCLEAR;
+		if (isAWin(COMPUTER))	return COMPUTER_WIN;
+		else if (isAWin(HUMAN)) return HUMAN_WIN;
+		else if (boardIsFull()) return DRAW;
+		 						return UNCLEAR;
 	}
 	
 	
