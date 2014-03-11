@@ -3,10 +3,7 @@ package huffman;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-
-
+import java.util.Stack;
 
 //Huffman tree class interface: manipulate huffman coding tree.
 //
@@ -81,7 +78,23 @@ public class HuffmanTree
 	  */
 	 public int getChar( String code )
 	 {
-	     // TODO = opdracht           
+	     // TODO = opdracht 
+		 HuffNode parent = root;
+		 int codeLength = code.length();
+		 for (int i = 0; i < codeLength; i++)
+		 {
+			// Als er geen parent is dan stop
+			if (parent == null) break;
+
+			char c = code.charAt(i);
+			if (c == '0')
+				// Neem links
+				parent = parent.left;
+			else
+				// Neem rechts
+				parent = parent.right;
+		 }
+		 return parent == null ? ERROR : parent.value;
 	 }
 	 
 	 /**
@@ -143,19 +156,38 @@ public class HuffmanTree
 	  */
 	 private void createTree( )
 	 {
-	     ArrayList<HuffNode> ar = new ArrayList<HuffNode>();
-		 
-	     for( int i = 0; i <= BitUtils.DIFF_BYTES; i++ )
-	         if ( theCounts.getCount( i ) > 0 )
-	         {
-	             HuffNode newNode = new HuffNode( i,
-	                    theCounts.getCount( i ), null, null, null );
-	             theNodes[ i ] =  newNode;
-	             ar.add( newNode );
-	         }
-	              
-	     // TODO = opdracht      
-	     
-	     root = ar.remove(0);
+		Stack<HuffNode> st = new Stack<HuffNode>();
+
+		for (int i = 0; i <= BitUtils.DIFF_BYTES; i++)
+			if (theCounts.getCount(i) > 0)
+			{
+				HuffNode newNode = new HuffNode(i, theCounts.getCount(i), null, null, null);
+				theNodes[i] = newNode;
+				st.add(newNode);
+			}
+
+		// TODO = opdracht
+		theNodes[END] = new HuffNode(END, 1, null, null, null);
+		st.push(theNodes[END]);
+
+		while (st.size() > 1)
+		{
+			// Laatste 2 nodes verwijderen
+			HuffNode left = st.pop();
+			HuffNode right = st.pop();
+			
+			// Linker en rechter node parent aanmaken
+			HuffNode result = new HuffNode(INCOMPLETE_CODE, left.weight + right.weight, left, right, null);
+			
+			// Linker en rechter node updaten
+			left.parent = result;
+			right.parent = result;
+			
+			// Terug op de stack plaatsen
+			st.push(result);
+		}
+
+		// Root is de laatste
+		root = st.pop();
 	 }
 }

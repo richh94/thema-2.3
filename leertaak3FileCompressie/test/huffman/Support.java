@@ -6,9 +6,9 @@ import java.io.FileOutputStream;
 public class Support {
 	// These are the 3 files we will use for testing. The "enc" and "dec" files will be created by the
 	// program. We just need to define them here so our test knows what they are called.
-	String testFilePlain = "testHuffman.txt";
-	String testFileEnc = "testHuffman.txt.huf";
-	String testFileDec = "testHuffman.txt.uc";
+	String testFilePlain = "/Users/jeffreyzant/Documents/School/HBO/Eclipse/Thema 2.3/leertaak3FileCompressie/testHuffman.txt";
+	String testFileEnc = "/Users/jeffreyzant/Documents/School/HBO/Eclipse/Thema 2.3/leertaak3FileCompressie/testHuffman.txt.huf";
+	String testFileDec = "/Users/jeffreyzant/Documents/School/HBO/Eclipse/Thema 2.3/leertaak3FileCompressie/testHuffman.txt.uc";
 	
 	
 	/* Below are our 2 testing texts. All these texts are int arrays rather than just strings to make it
