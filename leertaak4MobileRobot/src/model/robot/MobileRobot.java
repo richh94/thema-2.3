@@ -8,9 +8,7 @@ import model.environment.Position;
 import model.virtualmap.OccupancyMap;
 
 import java.io.PrintWriter;
-
 import java.util.ArrayList;
-
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
